@@ -17,8 +17,8 @@ jobs:
       - name: "Build Docker Image"
         run: |
           docker login -u znfstha -p $DOCKERHUB_PAT
-          docker build -t znfstha/CICD .
-          docker push znfstha/CICD
+          docker build -t znfstha/cicd .
+          docker push znfstha/cicd
         env:
           DOCKERHUB_PAT: ${{ secrets.DOCKERHUB_PAT }}
 
@@ -40,6 +40,6 @@ jobs:
 
       - name: "Docker Pull and Restart Docker"
         run: |
-          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker pull znfstha/CICD'
+          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker pull znfstha/cicd'
           ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker stop mynginx && docker rm mynginx'
-          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker run --name mynginx -p 80:80 -d znfstha/CICD'
+          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker run --name mynginx -p 80:80 -d znfstha/cicd'

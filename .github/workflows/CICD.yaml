@@ -41,5 +41,5 @@ jobs:
       - name: "Docker Pull and Restart Docker"
         run: |
           ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker pull znfstha/cicd'
-          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker stop mynginx && docker rm mynginx'
-          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker run --name mynginx -p 80:80 -d znfstha/cicd'
+          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker stop NGINX-CICD && docker rm NGINX-CICD'
+          ssh -t ubuntu@$SERVER_IP -i pem.pem 'docker run --name NGINX-CICD -p 80:80 -d znfstha/cicd'
